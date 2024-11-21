@@ -11,4 +11,4 @@ os_family_specific_pre:
   # Required for the apt_repository module
   - python3-software-properties
   - python3-apt
-
+  - python3-pexpect
