@@ -3,7 +3,7 @@ required_packages:
   - sudo
   - python3-pip
   - python3-virtualenv
-  - git
+  # - git
   # Used for the sync_clients matching
   - gawk
   # Used to verify GPG signatures for mirrored packages

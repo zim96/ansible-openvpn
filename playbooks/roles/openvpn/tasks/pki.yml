@@ -10,7 +10,7 @@
 - name: OpenVPN | PKI | Copy Easy-RSA to OpenVPN folder
   file:
     src: "{{ src_easyrsa_path }}"
-    dest: "{{ dest_easyrsa_path }}"
+    dest: "{{ easyrsa_path }}"
     state: link
 
 - name: OpenVPN | PKI | Make local destination folder
@@ -63,22 +63,22 @@
     path_server_key: "{{ openvpn_path_keys }}/server@{{ openvpn_server_common_name }}.key"
     path_server_cert: "{{ openvpn_path_certs }}/server@{{ openvpn_server_common_name }}.crt"
 
-- name: OpenVPN | PKI | EasyRSA Link project
-  file:
-    src: ./easyrsa/easyrsa3/pki
-    dest: "{{ openvpn_path_pki }}"
-    owner: root
-    group: root
-    force: yes
-    state: link
+# - name: OpenVPN | PKI | EasyRSA Link project
+#   file:
+#     src: {{ easyrsa_path}}
+#     dest: "{{ openvpn_path_pki }}"
+#     owner: root
+#     group: root
+#     force: yes
+#     state: link
 
 - name: OpenVPN | PKI | Deploy vars configuration
   template:
     src: etc_openvpn_easyrsa_easyrsa3_vars.j2
     dest: "{{ openvpn_path_easyrsa }}/vars"
-    owner: root
-    group: root
-    mode: 0600
+    # owner: root
+    # group: root
+    # mode: 0600
 
 - name: OpenVPN | PKI | Intialize PKI
   shell: echo 'yes' | ./easyrsa init-pki
