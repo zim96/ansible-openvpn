@@ -12,6 +12,10 @@
 ## I need to make a folder and make symlinks of the indivual files, instead of symlinking the whole folder
 - name: OpenVPN | PKI | Make symbolic link to easy-rsa
   block:
+    - name: create the easyrsa directory
+      file:
+        path: "{{ easyrsa_path }}"
+        state: directory
     - name: find all files in the source directory
       find:
         paths: "{{ src_easyrsa_path }}"
@@ -73,22 +77,11 @@
     path_server_key: "{{ openvpn_path_keys }}/server@{{ openvpn_server_common_name }}.key"
     path_server_cert: "{{ openvpn_path_certs }}/server@{{ openvpn_server_common_name }}.crt"
 
-# - name: OpenVPN | PKI | EasyRSA Link project
-#   file:
-#     src: {{ easyrsa_path}}
-#     dest: "{{ openvpn_path_pki }}"
-#     owner: root
-#     group: root
-#     force: yes
-#     state: link
-
 - name: OpenVPN | PKI | Deploy vars configuration
   template:
     src: etc_openvpn_easyrsa_easyrsa3_vars.j2
     dest: "{{ openvpn_path_easyrsa }}/vars"
-    # owner: root
-    # group: root
-    # mode: 0600
+
 ### PROBLEM HERE
 - name: OpenVPN | PKI | Intialize PKI
   shell: echo 'yes' | ./easyrsa init-pki
