@@ -12,7 +12,7 @@
     src: "{{ src_easyrsa_path }}"
     dest: "{{ easyrsa_path }}"
     state: link
-    follow: false
+    mode: 0700
 
 - name: OpenVPN | PKI | Make local destination folder
   local_action: file path={{ local_creds_folder }}/ state=directory
@@ -80,7 +80,7 @@
     # owner: root
     # group: root
     # mode: 0600
-
+### PROBLEM HERE
 - name: OpenVPN | PKI | Intialize PKI
   shell: echo 'yes' | ./easyrsa init-pki
   args:
