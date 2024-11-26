@@ -11,7 +11,7 @@
 
 ## I need to make a folder and make symlinks of the indivual files, instead of symlinking the whole folder
 - name: OpenVPN | PKI | Make symbolic link to easy-rsa
-  tasks:
+  block:
     - name: find all files in the source directory
       find:
         paths: "{{ src_easyrsa_path }}"
@@ -21,8 +21,7 @@
         src: "{{ item.path }}"
         dest: "{{ easyrsa_path }}/{{ item.path | basename }}"
         state: link
-      loop: "{{ easyrsa_files.files }}"
-
+      with_items: "{{ easyrsa_files.files }}"
 
 - name: OpenVPN | PKI | Make local destination folder
   local_action: file path={{ local_creds_folder }}/ state=directory
