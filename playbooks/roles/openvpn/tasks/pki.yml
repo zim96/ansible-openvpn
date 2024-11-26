@@ -16,6 +16,7 @@
       file:
         path: "{{ easyrsa_path }}"
         state: directory
+        mode: "0700"
     - name: find all files in the source directory
       find:
         paths: "{{ src_easyrsa_path }}"
@@ -24,7 +25,6 @@
       file:
         src: "{{ item.path }}"
         dest: "{{ easyrsa_path }}/{{ item.path | basename }}"
-        mode: "0700"
         state: link
       with_items: "{{ easyrsa_files.files }}"
 
