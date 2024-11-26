@@ -24,6 +24,7 @@
       file:
         src: "{{ item.path }}"
         dest: "{{ easyrsa_path }}/{{ item.path | basename }}"
+        mode: "0700"
         state: link
       with_items: "{{ easyrsa_files.files }}"
 
