@@ -13,3 +13,5 @@ required_packages:
   - "{{ package_name_words }}"
   - openssl
   - openvpn
+  - easy-rsa
+  

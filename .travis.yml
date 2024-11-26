@@ -47,7 +47,7 @@ before_install:
 
 install:
   - sudo -H pip install ansible ansible-lint
-  - sudo apt-get -y install openssl
+  - sudo apt -y install openssl
 
 script:
   # Ansible syntax check.
