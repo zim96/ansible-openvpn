@@ -30,6 +30,8 @@
       file:
         path: "{{ easyrsa_path }}"
         state: directory
+        owner: "{{ ansible_user }}"
+        group: "{{ ansible_user }}"
         mode: "0700"
 
 - name: OpenVPN | PKI | Make local destination folder
